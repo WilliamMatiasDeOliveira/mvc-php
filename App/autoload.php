@@ -7,6 +7,6 @@ spl_autoload_register(function($class){
     if(file_exists($file)){
         require_once $file;
     } else {
-        throw new Exception("CLASSE NÃO ENCONTRADA");
+        throw new Exception("ERRO AO CARREGAR A $class.php");
     }
 });

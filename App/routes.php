@@ -1,23 +1,19 @@
 <?php
 
-use App\Controllers\LoginController;
-use App\Controllers\MainController;
-
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $url = str_replace("copia/App/", "", $url);
 
 switch($url){
     case "/":
-        MainController::login();
+        echo "apresentar o form de login";
         break;
-    case "/create-account":
-        MainController::create_account();
+    case "/login_submit":
+        echo "vc entrou no sistema";
+        break;
+    case "/create_account":
+        echo "apresentar o form de criação de conta";
         break;
     case "/create_account_submit":
-        LoginController::create_account_submit();
+        echo "sua conta foi criada";
         break;
-    case "/home":
-        echo "pagina home";
-        break;
-
 }
