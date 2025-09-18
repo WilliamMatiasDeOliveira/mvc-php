@@ -1,0 +1,12 @@
+# Ativar reescrita de URL
+RewriteEngine On
+
+# Como o index.php está em /copia/App/
+RewriteBase /copia/App/
+
+# Se for um arquivo ou diretório real, não redireciona
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirecionar tudo para o index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
