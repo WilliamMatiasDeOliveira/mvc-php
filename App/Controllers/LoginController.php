@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\Connection;
+use App\Functions\Helpers;
+
 class LoginController{
 
     public static function create_account_submit(){
@@ -29,5 +32,13 @@ class LoginController{
         }
 
         unset($_SESSION['old']);
+
+        Helpers::emailValidate($_POST['email']);
+
+
+
+
     }
+
+    
 }
