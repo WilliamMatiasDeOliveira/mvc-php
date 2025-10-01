@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\DAO\UserDAO;
+use App\Functions\Helpers;
 use App\Models\User;
 
 class UserController
@@ -17,13 +19,37 @@ class UserController
         require_once VIEWS . "/create_account.php";
     }
 
-    public function create_account_submit()
+    public static function create_account_submit()
     {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+        session_start();
+        $nome = Helpers::sanitaze_input($_POST['nome']);
+        $email = Helpers::sanitaze_input($_POST['email']);
+        $senha = Helpers::sanitaze_input($_POST['senha']);
 
-        $user = new User($nome, $email, $senha);
-        $dao = new UserDAO();
+        $error = [];
+
+        if (empty($nome)) {
+            $error['nome'] = "O campo nome é obrigatório !";
+        }
+        if (empty($email)) {
+            $error['email'] = "O campo email é obrigatório !";
+        }
+        if (empty($senha)) {
+            $error['senha'] = "O campo senha é obrigatório !";
+        }
+
+        if (!empty($error)) {
+            $_SESSION['error'] = $error;
+            header("Location: /meu_pet_sumiu/create_account");
+        }
+
+        $user = new User();
+        $user->setNome($nome);
+        $user->setEmail($email);
+        $user->setSenha($senha);
+
+        $user_dao = new UserDAO();
+        $user_dao->teste();
+
     }
 }

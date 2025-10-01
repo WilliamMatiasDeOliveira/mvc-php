@@ -17,5 +17,7 @@ switch ($route) {
         UserController::create_account();
         break;
     case "/create_account_submit":
+        UserController::create_account_submit();
+        break;
 
 }

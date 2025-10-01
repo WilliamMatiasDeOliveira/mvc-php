@@ -5,9 +5,9 @@ namespace App\DAO;
 use PDO;
 use PDOException;
 
-class Connection{
-    protected $conn;
+abstract class Connection{
 
+    protected PDO $conn;
     public function __construct(){
         try {
             $this->conn = new PDO(
@@ -25,13 +25,5 @@ class Connection{
         } catch (PDOException $e) {
             die("Erro na conexão "). $e->getMessage();
         }
-    }
-
-    public function getConnection(){
-        return $this->conn;
-    }
-
-    public function closeConnection(){
-        $this->conn = null;
     }
 }
